@@ -10,7 +10,7 @@
 #include "GenericClientManager.h"
 
 void GenericClientManager::setup(){
-    
+
     this->minX=99999.0f;
     this->maxX=0.0f;
     this->minY=99999.0f;
@@ -56,7 +56,7 @@ void GenericClientManager::setup(){
 
 //--------------------------------------------------------------
 void GenericClientManager::update(){
-    
+
     //check for serverMessages
     if (useServer){
         this->checkServerMessages();
@@ -550,7 +550,7 @@ int GenericClientManager::loadFromXML(){
             
             model->loadModel(meshPath);
             
-            model->setScaleNomalization(false);
+            model->setScaleNormalization(false);
             
             model->setScale(1.0f, 1.0f, 1.0f);
             
@@ -859,6 +859,7 @@ void GenericClientManager::draw()
             px->draw();
             it++;
         }
+        specific->draw();
         glPopMatrix();
 
         cam.end();

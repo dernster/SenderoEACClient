@@ -1,4 +1,5 @@
 ofxAssimpModelLoader
 ofxNetwork
-ofxXmlSettings
+ofxOsc
 ofxUI
+ofxXmlSettings

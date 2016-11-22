@@ -8,6 +8,8 @@
 
 #include <iostream>
 #include "SpecificBehaviour.h"
+#include "BlobManager.hpp"
+#include "MoodsManager.hpp"
 
 SpecificBehaviour::SpecificBehaviour(){
     
@@ -24,8 +26,75 @@ void SpecificBehaviour::setup(map<int,Pixel*>* iPixels, vector<Pixel*>* iPixelsF
     this->pixelsFast=iPixelsFast;
     
     //custom setup must go here below.
+    radius = 30;
+    sphere.setRadius(70);
+    sphere.setPosition(0,0,0);
     
+    movingSphere.setRadius(2);
+    
+    BlobManager.init();
+    MoodsManager.init();
 }
+
+ofVec3f* SpecificBehaviour::intersect(ofVec3f src, ofVec3f direction){
+    /*Las posiciones relativas entre un rayo y una esfera son:
+     *1. No se intersectan
+     *2. El rayo es tangente a la esfera (Interseccion en 1 punto)
+     *3. El rayo atraviesa la esfera (Interseccion en 2 puntos)
+     *
+     * Para averiguar esto, sustituyo en la ecuacion de la esfera la del rayo
+     * y mediante la obtencion de las raices determino los puntos de interseccion
+     */
+    double radio = 70;
+    
+    ofVec3f centro(0,0,0);
+    direction = direction.getNormalized();
+    //Obtengo las partes del rayo para mayor simplicidad de las cuentas
+    double x_src = src.x;
+    double y_src = src.y;
+    double z_src = src.z;
+    
+    double x_dir = direction.x;
+    double y_dir = direction.y;
+    double z_dir = direction.z;
+    
+    //Terminos de la ecuacion cuadratica
+    
+    // Por vector normal, dX² + dY² + dZ² = 1
+    double a = 1;
+    double b = 2*(x_dir*(x_src - centro.x)) + 2*((y_dir*(y_src - centro.y))) + 2*(z_dir*(z_src - centro.z));
+    double c = pow(x_src - centro.x,2) + pow(y_src - centro.y,2) + pow(z_src - centro.z,2) - pow(radio,2);
+    
+    double discriminante = pow(b,2) - 4*(a*c);
+    double t;
+
+    if (discriminante < 0){
+        //No hubo interseccion
+        return NULL;
+    } else {
+        //Hubo interseccion, determino si fue una o dos
+        double t1 = (-b - sqrt(discriminante))/2;
+        //std::cout << "t1: " << t1 << std::endl;
+        double t2 = ((-b + sqrt(discriminante))/2);
+        //Caso de interseccion doble, devuelvo la mas cercana al rayo
+        
+        if (t1 > 0){ //&& (t1 <= Constantes::UMBRAL_DOUBLE) && (objRef == this)){
+            t = t1;
+        } else if (t2 > 0){
+            t = t2;
+        }else{
+            return NULL;
+        }
+    }
+    
+    
+    ofVec3f* punto = new ofVec3f(0,0,0);
+    
+    *punto = src + direction*t;
+    return punto;
+}
+
+ofVec3f inters;
 
 void SpecificBehaviour::update(){
     //new behaviour here
@@ -39,10 +108,51 @@ void SpecificBehaviour::update(){
         it++;
     }
     //end of sample
+
+    BlobManager.update();
+    MoodsManager.update();
+
+    for(int i = 0; i < pixelsFast->size(); i++){
+        Pixel* px = (*pixelsFast)[i];
+        ofVec3f pxPosition = px->getPosition();
+        
+        for(int b = 0; b < BlobManager.count(); b++){
+            Blob* blob = BlobManager.blob(b);
+            ofVec3f blobPos((blob->x - .5) * 400, 0, (blob->y - .5) * 400);
+
+            // discard blobs inside the sphere
+            if (blobPos.distance(ofVec3f(0)) < 70) {
+                continue;
+            }
+
+            ofVec3f* intersection = intersect(blobPos, ofVec3f(0) - blobPos);
+
+            if (intersection) {
+                inters = *intersection;
+                float blobDistance = blobPos.distance(*intersection);
+                float distRadius = ofLerp(20, 100, MIN(blobDistance, 100)/100);
+                float dist = pxPosition.distance(*intersection);
+                
+                if (dist < distRadius){
+                    float normalizedDist = 1 - dist/distRadius;
+                    px->blendRGBA(198,0,147,255,ofLerp(0.1,1,normalizedDist));
+                }
+            } else {
+                px->blendRGBA(0,0,0,255,1);
+            }
+        }
+        
+    }
 }
 
 void SpecificBehaviour::draw(){
     //custom draw here.
+    ofSetColor(0, 255, 0, 100);
+//    ofDrawSphere(0, 0, 0, 70);
+    ofSetColor(255);
+    ofDrawSphere(inters, 5);
+    BlobManager.draw();
+    MoodsManager.draw();
 }
 
 void SpecificBehaviour::keyPressed(int key){

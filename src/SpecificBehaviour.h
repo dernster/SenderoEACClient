@@ -16,9 +16,16 @@
 #include <map>
 #include <vector>
 
-
 class SpecificBehaviour {
-    
+private:
+    ofSpherePrimitive sphere;
+    ofSpherePrimitive movingSphere;
+    ofVec3f movingPoint;
+    const double sphereRadius = 70;
+    float radius;
+
+    ofVec3f toPolar(ofVec3f xyz);
+    ofVec3f toCartesian(ofVec3f rthetaphi);
 public:
         
     SpecificBehaviour();
@@ -27,6 +34,8 @@ public:
     void setup(map<int,Pixel*>* pixels, vector<Pixel*>* pixelsFast);
     void update();
     void draw();
+    
+    ofVec3f* intersect(ofVec3f src, ofVec3f direction);
     
     void keyPressed(int key); 
     
