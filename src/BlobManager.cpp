@@ -7,6 +7,7 @@
 //
 
 #include "BlobManager.hpp"
+#include "Settings.hpp"
 
 void init();
 void update();
@@ -48,9 +49,9 @@ void BlobManagerClass::update() {
             newBlobData->size = m.getArgAsFloat(3);
             newBlobData->time = ofGetElapsedTimef();
 
-            // normalize just in case
-            newBlobData->x = normalize(newBlobData->x);
-            newBlobData->y = normalize(newBlobData->y);
+            // convert to coord space
+            newBlobData->x = (normalize(newBlobData->x) - .5) * Settings.ROOM_WIDTH;
+            newBlobData->y = (normalize(newBlobData->y) - .5) * Settings.ROOM_DEPTH;
             newBlobData->size = normalize(newBlobData->size);
 
             addOrUpdateBlob(newBlobData);
@@ -63,7 +64,7 @@ void BlobManagerClass::update() {
 
 void BlobManagerClass::draw() {
     ofSetColor(255,0,0);
-    ofFill();
+//    ofFill();
     drawBlobs();
 }
 
@@ -78,7 +79,7 @@ void BlobManagerClass::addOrUpdateBlob(Blob *b){
     if (not exist)
         blobs.push_back(b);
     else
-        blobs[--i] = b;
+        blobs[--i] = b; //TODO: memory leak
 }
 
 void BlobManagerClass::printBlobs(){
@@ -92,7 +93,7 @@ void BlobManagerClass::printBlob(Blob *b){
 
 void BlobManagerClass::drawBlobs(){
     for(int i=0; i<blobs.size(); i++)
-        ofDrawSphere((blobs[i]->x - .5) * 400, 0, (blobs[i]->y - .5) * 400, blobs[i]->size*100.0f);
+        ofDrawSphere(blobs[i]->x, 0, blobs[i]->y, blobs[i]->size*100.0f);
 }
 
 int BlobManagerClass::count(){

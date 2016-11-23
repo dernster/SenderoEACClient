@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "ofxOsc.h"
 
-#define EXPIRATION_TIME 5
+#define EXPIRATION_TIME 2
 #define OSC_PORT_BLOBS 12345
 
 #define BlobManager (*BlobManagerClass::instance())

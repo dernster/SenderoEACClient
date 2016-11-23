@@ -10,6 +10,7 @@
 #include "SpecificBehaviour.h"
 #include "BlobManager.hpp"
 #include "MoodsManager.hpp"
+#include "Settings.hpp"
 
 SpecificBehaviour::SpecificBehaviour(){
     
@@ -24,10 +25,8 @@ void SpecificBehaviour::setup(map<int,Pixel*>* iPixels, vector<Pixel*>* iPixelsF
     
     this->pixels=iPixels;
     this->pixelsFast=iPixelsFast;
-    
-    //custom setup must go here below.
-    radius = 30;
-    sphere.setRadius(70);
+
+    sphere.setRadius(Settings.BARCELONA_RADIUS);
     sphere.setPosition(0,0,0);
     
     movingSphere.setRadius(2);
@@ -45,7 +44,7 @@ ofVec3f* SpecificBehaviour::intersect(ofVec3f src, ofVec3f direction){
      * Para averiguar esto, sustituyo en la ecuacion de la esfera la del rayo
      * y mediante la obtencion de las raices determino los puntos de interseccion
      */
-    double radio = 70;
+    double radio = Settings.BARCELONA_RADIUS;
     
     ofVec3f centro(0,0,0);
     direction = direction.getNormalized();
@@ -97,17 +96,15 @@ ofVec3f* SpecificBehaviour::intersect(ofVec3f src, ofVec3f direction){
 ofVec3f inters;
 
 void SpecificBehaviour::update(){
-    //new behaviour here
-    //sample -> paint every pixel with red at key pressed and blend with black at update
+
     vector<Pixel*>::iterator it = this->pixelsFast->begin();
     
     while (it!=this->pixelsFast->end())
     {
         Pixel* px = *it;
-        px->blendRGBA(0, 0, 0, 255, 0.2f);
+        px->blendRGBA(0, 0, 0, 255, 0.1f);
         it++;
     }
-    //end of sample
 
     BlobManager.update();
     MoodsManager.update();
@@ -118,10 +115,9 @@ void SpecificBehaviour::update(){
         
         for(int b = 0; b < BlobManager.count(); b++){
             Blob* blob = BlobManager.blob(b);
-            ofVec3f blobPos((blob->x - .5) * 400, 0, (blob->y - .5) * 400);
-
+            ofVec3f blobPos(blob->x, 0, blob->y);
             // discard blobs inside the sphere
-            if (blobPos.distance(ofVec3f(0)) < 70) {
+            if (blobPos.distance(ofVec3f(0)) < Settings.BARCELONA_RADIUS) {
                 continue;
             }
 
@@ -130,29 +126,38 @@ void SpecificBehaviour::update(){
             if (intersection) {
                 inters = *intersection;
                 float blobDistance = blobPos.distance(*intersection);
-                float distRadius = ofLerp(20, 100, MIN(blobDistance, 100)/100);
-                float dist = pxPosition.distance(*intersection);
-                
-                if (dist < distRadius){
-                    float normalizedDist = 1 - dist/distRadius;
-                    px->blendRGBA(198,0,147,255,ofLerp(0.1,1,normalizedDist));
+                if (blobDistance < Settings.BLOB_DISTANCE_THRESHOLD){
+                    float distRadius = ofLerp(Settings.MIN_LIGHTING_RADIUS, Settings.MAX_LIGHTING_RADIUS, blobDistance/Settings.BLOB_DISTANCE_THRESHOLD);
+                    float dist = pxPosition.distance(*intersection);
+                    
+                    if (dist < distRadius){
+                        float normalizedDist = 1 - dist/distRadius;
+                        px->blendRGBA(198,0,147,255,ofLerp(0.1,1,normalizedDist));
+                    }
                 }
+                delete intersection;
             } else {
                 px->blendRGBA(0,0,0,255,1);
             }
         }
-        
     }
 }
 
 void SpecificBehaviour::draw(){
     //custom draw here.
-    ofSetColor(0, 255, 0, 100);
-//    ofDrawSphere(0, 0, 0, 70);
     ofSetColor(255);
     ofDrawSphere(inters, 5);
     BlobManager.draw();
     MoodsManager.draw();
+    ofSetColor(0, 255, 0, 20);
+    ofDrawBox(
+        0,
+        -Settings.BARCELONA_BASE/2,
+        0,
+        Settings.ROOM_WIDTH,
+        Settings.BARCELONA_DIAMETER + Settings.BARCELONA_BASE,
+        Settings.ROOM_DEPTH
+    );
 }
 
 void SpecificBehaviour::keyPressed(int key){

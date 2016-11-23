@@ -41,7 +41,8 @@ void GenericClientManager::setup(){
 
     ofBackground(0, 0, 0);
 	glEnable(GL_DEPTH_TEST);
-    
+    ofEnableAlphaBlending();
+
     ofSetupScreen();
 
     myfont.loadFont("Arial.ttf", 12);
