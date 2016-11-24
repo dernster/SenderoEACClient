@@ -14,7 +14,6 @@
 
 using namespace std;
 
-#define EXPIRATION_TIME 5
 #define OSC_PORT_MOODS 12346
 
 #define MoodsManager (*MoodsManagerClass::instance())

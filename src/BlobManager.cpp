@@ -49,7 +49,8 @@ void BlobManagerClass::update() {
             newBlobData->y = m.getArgAsFloat(2);
             newBlobData->size = m.getArgAsFloat(3);
             newBlobData->time = ofGetElapsedTimef();
-            newBlobData->startAlpha = 0;
+            newBlobData->startAlpha = 0.0f;
+            newBlobData->audioValue = 1.0f;
 
             // convert to coord space
             newBlobData->x = (normalize(newBlobData->x) - .5) * Settings.ROOM_WIDTH;
@@ -70,22 +71,18 @@ void BlobManagerClass::draw() {
 }
 
 void BlobManagerClass::addOrUpdateBlob(Blob *b){
-    bool exist = false;
     int i = 0;
-    while (not exist and i<blobs.size()) {
-        exist = blobs[i]->id == b->id;
+    while (i<blobs.size() and blobs[i]->id != b->id)
         i++;
-    }
     
-    if (not exist){
+    if (i < blobs.size()){
+        b->startAlpha = blobs[i]->startAlpha;
+        b->color = blobs[i]->color;
+        delete blobs[i];
+        blobs[i] = b;
+    } else {
         asignColorTo(b);
         blobs.push_back(b);
-    }
-    else {
-        b->startAlpha = blobs[i-1]->startAlpha;
-        b->color = blobs[i-1]->color;
-        delete blobs[i-1];
-        blobs[i-1] = b;
     }
 }
 
@@ -141,4 +138,13 @@ void BlobManagerClass::reassignBlobColors(){
         Blob* blob = blobs[i];
         blob->color = MoodsManager.getColorForBlobId(blob->id);
     }
+}
+
+void BlobManagerClass::setAudioValue(int id, float value){
+    int i = 0;
+    while (i<blobs.size() and blobs[i]->id != id)
+        i++;
+    
+    if (i < blobs.size())
+        blobs[i]->audioValue = value;
 }
