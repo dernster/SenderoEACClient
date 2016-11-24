@@ -48,6 +48,7 @@ void BlobManagerClass::update() {
             newBlobData->y = m.getArgAsFloat(2);
             newBlobData->size = m.getArgAsFloat(3);
             newBlobData->time = ofGetElapsedTimef();
+            newBlobData->startAlpha = 0;
 
             // convert to coord space
             newBlobData->x = (normalize(newBlobData->x) - .5) * Settings.ROOM_WIDTH;
@@ -78,8 +79,11 @@ void BlobManagerClass::addOrUpdateBlob(Blob *b){
     
     if (not exist)
         blobs.push_back(b);
-    else
-        blobs[--i] = b; //TODO: memory leak
+    else {
+        b->startAlpha = blobs[i-1]->startAlpha;
+        delete blobs[i-1];
+        blobs[i-1] = b;
+    }
 }
 
 void BlobManagerClass::printBlobs(){

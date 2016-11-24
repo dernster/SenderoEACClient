@@ -15,6 +15,7 @@
 #include "DTPixel.h"
 #include <map>
 #include <vector>
+#include "BlobManager.hpp"
 
 class SpecificBehaviour {
 private:
@@ -26,6 +27,7 @@ private:
 
     ofVec3f toPolar(ofVec3f xyz);
     ofVec3f toCartesian(ofVec3f rthetaphi);
+    void calculatePixelColorsForBlob(Blob* blob, const float & blobDistance, const ofVec3f & intersection);
 public:
         
     SpecificBehaviour();

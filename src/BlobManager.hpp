@@ -23,6 +23,7 @@ struct Blob {
     float y;
     float size;
     float time;
+    float startAlpha;
 };
 
 class BlobManagerClass {

@@ -108,37 +108,91 @@ void SpecificBehaviour::update(){
 
     BlobManager.update();
     MoodsManager.update();
+    
+    
+//    // calculate blobs within valid thresholds
+//
+//    vector<Blob*> activeBlobs;
+//
+//    for(int b = 0; b < BlobManager.count(); b++){
+//        Blob* blob = BlobManager.blob(b);
+//        ofVec3f blobPos(blob->x, 0, blob->y);
+//
+//        // discard blobs inside the sphere
+//        if (blobPos.distance(ofVec3f(0)) < Settings.BARCELONA_RADIUS) {
+//            continue;
+//        }
+//        
+//        ofVec3f* intersection = intersect(blobPos, ofVec3f(0) - blobPos);
+//        if (intersection) {
+//            inters = *intersection;
+//            float blobDistance = blobPos.distance(*intersection);
+//            if (blobDistance < Settings.BLOB_DISTANCE_THRESHOLD){
+//                blob->distanceToBarcelona = blobDistance;
+//                blob->intersectionWithBarcelona = *intersection;
+//                activeBlobs.push_back(blob);
+//            }
+//            delete intersection;
+//        }
+//    }
+
+    // calculate pixel colors
+    
+    for(int b = 0; b < BlobManager.count(); b++){
+        Blob* blob = BlobManager.blob(b);
+        ofVec3f blobPos(blob->x, 0, blob->y);
+
+        if (blobPos.distance(ofVec3f(0)) < Settings.BARCELONA_RADIUS)
+            continue;
+        
+        ofVec3f* intersection = intersect(blobPos, ofVec3f(0) - blobPos);
+        if (!intersection)
+            continue;
+        
+        inters = *intersection;
+        float blobDistance = blobPos.distance(*intersection);
+        if (blobDistance < Settings.BLOB_DISTANCE_THRESHOLD){
+            calculatePixelColorsForBlob(blob, blobDistance, *intersection);
+        }
+        delete intersection;
+    }
+//
+//
+//    for(int i = 0; i < pixelsFast->size(); i++){
+//        Pixel* px = (*pixelsFast)[i];
+//        ofVec3f pxPosition = px->getPosition();
+//        
+//        for(int b = 0; b < activeBlobs.size(); b++){
+//            Blob* blob = activeBlobs[b];
+//            ofVec3f blobPos(blob->x, 0, blob->y);
+//            // discard blobs inside the sphere
+//            if (blobPos.distance(ofVec3f(0)) < Settings.BARCELONA_RADIUS) {
+//                continue;
+//            }
+//
+//            float distRadius = ofLerp(Settings.MIN_LIGHTING_RADIUS, Settings.MAX_LIGHTING_RADIUS, blob->distanceToBarcelona/Settings.BLOB_DISTANCE_THRESHOLD);
+//            float dist = pxPosition.distance(blob->intersectionWithBarcelona);
+//
+//            if (dist < distRadius){
+//                float normalizedDist = 1 - dist/distRadius;
+//                px->blendRGBA(198,0,147,255,ofLerp(0.1,1,normalizedDist));
+//            }
+//        }
+//    }
+}
+
+void SpecificBehaviour::calculatePixelColorsForBlob(Blob* blob, const float & blobDistance, const ofVec3f & intersection){
 
     for(int i = 0; i < pixelsFast->size(); i++){
         Pixel* px = (*pixelsFast)[i];
         ofVec3f pxPosition = px->getPosition();
+
+        float distRadius = ofLerp(Settings.MIN_LIGHTING_RADIUS, Settings.MAX_LIGHTING_RADIUS, blobDistance/Settings.BLOB_DISTANCE_THRESHOLD);
+        float dist = pxPosition.distance(intersection);
         
-        for(int b = 0; b < BlobManager.count(); b++){
-            Blob* blob = BlobManager.blob(b);
-            ofVec3f blobPos(blob->x, 0, blob->y);
-            // discard blobs inside the sphere
-            if (blobPos.distance(ofVec3f(0)) < Settings.BARCELONA_RADIUS) {
-                continue;
-            }
-
-            ofVec3f* intersection = intersect(blobPos, ofVec3f(0) - blobPos);
-
-            if (intersection) {
-                inters = *intersection;
-                float blobDistance = blobPos.distance(*intersection);
-                if (blobDistance < Settings.BLOB_DISTANCE_THRESHOLD){
-                    float distRadius = ofLerp(Settings.MIN_LIGHTING_RADIUS, Settings.MAX_LIGHTING_RADIUS, blobDistance/Settings.BLOB_DISTANCE_THRESHOLD);
-                    float dist = pxPosition.distance(*intersection);
-                    
-                    if (dist < distRadius){
-                        float normalizedDist = 1 - dist/distRadius;
-                        px->blendRGBA(198,0,147,255,ofLerp(0.1,1,normalizedDist));
-                    }
-                }
-                delete intersection;
-            } else {
-                px->blendRGBA(0,0,0,255,1);
-            }
+        if (dist < distRadius){
+            float normalizedDist = 1 - dist/distRadius;
+            px->blendRGBA(198,0,147,255,ofLerp(0.1,1,normalizedDist));
         }
     }
 }
