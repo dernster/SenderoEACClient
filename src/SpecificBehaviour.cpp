@@ -10,6 +10,7 @@
 #include "SpecificBehaviour.h"
 #include "BlobManager.hpp"
 #include "MoodsManager.hpp"
+#include "AudioManager.hpp"
 #include "Settings.hpp"
 #include "BehaviourManager.hpp"
 
@@ -34,6 +35,7 @@ void SpecificBehaviour::setup(map<int,Pixel*>* iPixels, vector<Pixel*>* iPixelsF
     
     BlobManager.init();
     MoodsManager.init();
+    AudioManager.init();
     BehaviourManager::init();
 }
 
@@ -110,10 +112,9 @@ void SpecificBehaviour::update(){
 
     BlobManager.update();
     MoodsManager.update();
+    AudioManager.update();
 
     BehaviourManager::behaviour["pulse"]->blend(pixelsFast, 255);
-
-//    // calculate pixel colors
 //
 //    for(int b = 0; b < BlobManager.count(); b++){
 //        Blob* blob = BlobManager.blob(b);
@@ -133,7 +134,6 @@ void SpecificBehaviour::update(){
 //        }
 //        delete intersection;
 //    }
-
 }
 
 void SpecificBehaviour::calculatePixelColorsForBlob(Blob* blob, const float & blobDistance, const ofVec3f & intersection){
@@ -159,6 +159,7 @@ void SpecificBehaviour::draw(){
     ofDrawSphere(inters, 5);
     BlobManager.draw();
     MoodsManager.draw();
+    AudioManager.draw();
     ofSetColor(0, 255, 0, 20);
     ofDrawBox(
         0,

@@ -25,6 +25,7 @@ struct Blob {
     float time;
     float startAlpha;
     ofColor color;
+    float audioValue;
 };
 
 class BlobManagerClass {
@@ -58,6 +59,7 @@ public:
     void draw();
     void reassignBlobColors();
     void printStatus();
+    void setAudioValue(int id, float value);
 };
 
 #endif /* BlobManager_hpp */
