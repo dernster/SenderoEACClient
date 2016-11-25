@@ -28,6 +28,7 @@ public:
     float BLOB_DISTANCE_THRESHOLD;
     float MIN_LIGHTING_RADIUS;
     float MAX_LIGHTING_RADIUS;
+    int MAX_BLOBS;
     // end xml
 
     float METERS_TO_COORD;

@@ -24,6 +24,7 @@ struct Blob {
     float size;
     float time;
     float startAlpha;
+    ofColor color;
 };
 
 class BlobManagerClass {
@@ -41,6 +42,7 @@ private:
     // arrives, this method will be invoked to
     // create a new blob or update an existing one.
     void addOrUpdateBlob(Blob *b);
+    void asignColorTo(Blob *b);
     void printBlob(Blob *b);
     void printBlobs();
     void drawBlobs();
@@ -54,6 +56,7 @@ public:
     void init();
     void update();
     void draw();
+    void reassignBlobColors();
     void printStatus();
 };
 

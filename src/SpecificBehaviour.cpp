@@ -156,29 +156,7 @@ void SpecificBehaviour::update(){
         }
         delete intersection;
     }
-//
-//
-//    for(int i = 0; i < pixelsFast->size(); i++){
-//        Pixel* px = (*pixelsFast)[i];
-//        ofVec3f pxPosition = px->getPosition();
-//        
-//        for(int b = 0; b < activeBlobs.size(); b++){
-//            Blob* blob = activeBlobs[b];
-//            ofVec3f blobPos(blob->x, 0, blob->y);
-//            // discard blobs inside the sphere
-//            if (blobPos.distance(ofVec3f(0)) < Settings.BARCELONA_RADIUS) {
-//                continue;
-//            }
-//
-//            float distRadius = ofLerp(Settings.MIN_LIGHTING_RADIUS, Settings.MAX_LIGHTING_RADIUS, blob->distanceToBarcelona/Settings.BLOB_DISTANCE_THRESHOLD);
-//            float dist = pxPosition.distance(blob->intersectionWithBarcelona);
-//
-//            if (dist < distRadius){
-//                float normalizedDist = 1 - dist/distRadius;
-//                px->blendRGBA(198,0,147,255,ofLerp(0.1,1,normalizedDist));
-//            }
-//        }
-//    }
+
 }
 
 void SpecificBehaviour::calculatePixelColorsForBlob(Blob* blob, const float & blobDistance, const ofVec3f & intersection){
@@ -192,7 +170,8 @@ void SpecificBehaviour::calculatePixelColorsForBlob(Blob* blob, const float & bl
         
         if (dist < distRadius){
             float normalizedDist = 1 - dist/distRadius;
-            px->blendRGBA(198,0,147,255,ofLerp(0.1,1,normalizedDist));
+            ofColor c = blob->color;
+            px->blendRGBA(c.r,c.g,c.b,255,ofLerp(0.1,1,normalizedDist));
         }
     }
 }

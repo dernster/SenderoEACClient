@@ -8,6 +8,7 @@
 
 #include "BlobManager.hpp"
 #include "Settings.hpp"
+#include "MoodsManager.hpp"
 
 void init();
 void update();
@@ -15,7 +16,7 @@ void draw();
 
 BlobManagerClass* BlobManagerClass::_instance = NULL;
 
-BlobManagerClass::BlobManagerClass() {}
+BlobManagerClass::BlobManagerClass() { }
 
 BlobManagerClass* BlobManagerClass::instance() {
     if (_instance == NULL) {
@@ -65,7 +66,6 @@ void BlobManagerClass::update() {
 
 void BlobManagerClass::draw() {
     ofSetColor(255,0,0);
-//    ofFill();
     drawBlobs();
 }
 
@@ -77,10 +77,13 @@ void BlobManagerClass::addOrUpdateBlob(Blob *b){
         i++;
     }
     
-    if (not exist)
+    if (not exist){
+        asignColorTo(b);
         blobs.push_back(b);
+    }
     else {
         b->startAlpha = blobs[i-1]->startAlpha;
+        b->color = blobs[i-1]->color;
         delete blobs[i-1];
         blobs[i-1] = b;
     }
@@ -115,6 +118,7 @@ void BlobManagerClass::removeExpiredBlobs(){
         for (int i=0; i<blobs.size(); i++) {
             if (now - blobs[i]->time > EXPIRATION_TIME){
                 Blob* b = blobs[i];
+                MoodsManager.freeColorFromBlobId(b->id);
                 blobs[i] = blobs.back();
                 blobs.pop_back();
                 delete b;
@@ -126,4 +130,15 @@ void BlobManagerClass::removeExpiredBlobs(){
 
 void BlobManagerClass::printStatus(){
     printBlobs();
+}
+
+void BlobManagerClass::asignColorTo(Blob *b){
+    b->color = MoodsManager.getColorForBlobId(b->id);
+}
+
+void BlobManagerClass::reassignBlobColors(){
+    for(int i = 0; i < blobs.size(); i++) {
+        Blob* blob = blobs[i];
+        blob->color = MoodsManager.getColorForBlobId(blob->id);
+    }
 }

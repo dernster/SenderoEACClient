@@ -25,6 +25,7 @@ SettingsManager::SettingsManager(){
     BLOB_DISTANCE_THRESHOLD = CONVERT(1);
     MIN_LIGHTING_RADIUS = CONVERT(0.2);
     MAX_LIGHTING_RADIUS = CONVERT(1.2);
+    MAX_BLOBS = 2;
 
     // computed
     BARCELONA_RADIUS = BARCELONA_DIAMETER / 2;

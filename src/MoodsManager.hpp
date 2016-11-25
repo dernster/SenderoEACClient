@@ -19,29 +19,39 @@ using namespace std;
 
 #define MoodsManager (*MoodsManagerClass::instance())
 
-struct mood {
+struct Mood {
     string id;
     float hue;
     float saturation;
     float value;
 };
 
-struct moodTransition {
+struct MoodTransition {
     string id;
     float remainingTime;
+};
+
+struct ColorAndBlob {
+    ofColor color;
+    int blobId;
 };
 
 class MoodsManagerClass {
 private:
     static MoodsManagerClass* _instance;
-    MoodsManagerClass();
+    vector<ColorAndBlob> colors;
     ofxOscReceiver receiver;
-    
-    mood* currentMood;
-    moodTransition* transition;
+    MoodTransition* transition;
+    string lastMoodId;
+
+    MoodsManagerClass();
+    void updateColors();
 public:
     static MoodsManagerClass* instance();
-    
+    Mood* currentMood;
+
+    ofColor getColorForBlobId(int blobId);
+    void freeColorFromBlobId(int blobId);
     void init();
     void update();
     void draw();
