@@ -11,6 +11,7 @@
 #include "BlobManager.hpp"
 #include "MoodsManager.hpp"
 #include "Settings.hpp"
+#include "BehaviourManager.hpp"
 
 SpecificBehaviour::SpecificBehaviour(){
     
@@ -33,6 +34,7 @@ void SpecificBehaviour::setup(map<int,Pixel*>* iPixels, vector<Pixel*>* iPixelsF
     
     BlobManager.init();
     MoodsManager.init();
+    BehaviourManager::init();
 }
 
 ofVec3f* SpecificBehaviour::intersect(ofVec3f src, ofVec3f direction){
@@ -108,54 +110,29 @@ void SpecificBehaviour::update(){
 
     BlobManager.update();
     MoodsManager.update();
-    
-    
-//    // calculate blobs within valid thresholds
-//
-//    vector<Blob*> activeBlobs;
+
+    BehaviourManager::behaviour["pulse"]->blend(pixelsFast, 255);
+
+//    // calculate pixel colors
 //
 //    for(int b = 0; b < BlobManager.count(); b++){
 //        Blob* blob = BlobManager.blob(b);
 //        ofVec3f blobPos(blob->x, 0, blob->y);
 //
-//        // discard blobs inside the sphere
-//        if (blobPos.distance(ofVec3f(0)) < Settings.BARCELONA_RADIUS) {
+//        if (blobPos.distance(ofVec3f(0)) < Settings.BARCELONA_RADIUS)
 //            continue;
-//        }
 //        
 //        ofVec3f* intersection = intersect(blobPos, ofVec3f(0) - blobPos);
-//        if (intersection) {
-//            inters = *intersection;
-//            float blobDistance = blobPos.distance(*intersection);
-//            if (blobDistance < Settings.BLOB_DISTANCE_THRESHOLD){
-//                blob->distanceToBarcelona = blobDistance;
-//                blob->intersectionWithBarcelona = *intersection;
-//                activeBlobs.push_back(blob);
-//            }
-//            delete intersection;
+//        if (!intersection)
+//            continue;
+//        
+//        inters = *intersection;
+//        float blobDistance = blobPos.distance(*intersection);
+//        if (blobDistance < Settings.BLOB_DISTANCE_THRESHOLD){
+//            calculatePixelColorsForBlob(blob, blobDistance, *intersection);
 //        }
+//        delete intersection;
 //    }
-
-    // calculate pixel colors
-    
-    for(int b = 0; b < BlobManager.count(); b++){
-        Blob* blob = BlobManager.blob(b);
-        ofVec3f blobPos(blob->x, 0, blob->y);
-
-        if (blobPos.distance(ofVec3f(0)) < Settings.BARCELONA_RADIUS)
-            continue;
-        
-        ofVec3f* intersection = intersect(blobPos, ofVec3f(0) - blobPos);
-        if (!intersection)
-            continue;
-        
-        inters = *intersection;
-        float blobDistance = blobPos.distance(*intersection);
-        if (blobDistance < Settings.BLOB_DISTANCE_THRESHOLD){
-            calculatePixelColorsForBlob(blob, blobDistance, *intersection);
-        }
-        delete intersection;
-    }
 
 }
 
