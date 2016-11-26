@@ -15,9 +15,10 @@
 
 class Behaviour {
 public:
-    virtual void blend(vector<Pixel*>* pixels, float alpha) = 0;
+    string name;
+    Behaviour(string name);
+    virtual void blend(const vector<Pixel*> & pixels, float alpha) = 0;
     virtual ofVec3f intersect(ofVec3f src);
-
 };
 
 #endif /* Behaviour_hpp */

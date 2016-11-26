@@ -35,8 +35,12 @@ void SpecificBehaviour::setup(map<int,Pixel*>* iPixels, vector<Pixel*>* iPixelsF
     
     BlobManager.init();
     MoodsManager.init();
+<<<<<<< HEAD
     AudioManager.init();
     BehaviourManager::init();
+=======
+    Behaviours.init();
+>>>>>>> ca0d6c1... composer and basic behaviour interface
 }
 
 ofVec3f* SpecificBehaviour::intersect(ofVec3f src, ofVec3f direction){
@@ -100,6 +104,8 @@ ofVec3f* SpecificBehaviour::intersect(ofVec3f src, ofVec3f direction){
 ofVec3f inters;
 
 void SpecificBehaviour::update(){
+    
+    static int alph = 0;
 
     vector<Pixel*>::iterator it = this->pixelsFast->begin();
     
@@ -114,7 +120,17 @@ void SpecificBehaviour::update(){
     MoodsManager.update();
     AudioManager.update();
 
+<<<<<<< HEAD
     BehaviourManager::behaviour["pulse"]->blend(pixelsFast, 255);
+=======
+    alph = (alph + 1) % 255;
+    
+    float b = alph / 255.f;
+
+    Behaviours.update(*pixelsFast);
+
+//    // calculate pixel colors
+>>>>>>> ca0d6c1... composer and basic behaviour interface
 //
 //    for(int b = 0; b < BlobManager.count(); b++){
 //        Blob* blob = BlobManager.blob(b);

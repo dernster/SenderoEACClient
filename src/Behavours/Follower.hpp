@@ -15,9 +15,10 @@
 
 class Follower: public Behaviour {
 protected:
-    void drawForBlob(Blob* blob, vector<Pixel*>* pixels, float alpha, const float & blobDistance, const ofVec3f & intersection);
+    void drawForBlob(Blob* blob, const vector<Pixel*> & pixels, float alpha, const float & blobDistance, const ofVec3f & intersection);
 public:
-    virtual void blend(vector<Pixel*>* pixels, float alpha);
+    Follower(string name);
+    virtual void blend(const vector<Pixel*> & pixels, float alpha);
     virtual ofVec3f getBlobPos(Blob* blob);
     virtual float blobDistance(const ofVec3f & blobPos, const ofVec3f & intersection);
 };
