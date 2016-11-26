@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "ofxOsc.h"
+#include "ofEventUtils.h"
 
 using namespace std;
 
@@ -42,12 +43,15 @@ private:
     ofxOscReceiver receiver;
     MoodTransition* transition;
     string lastMoodId;
+    
+    ofEvent<Mood*> moodUpdate;
 
     MoodsManagerClass();
     void updateColors();
 public:
     static MoodsManagerClass* instance();
     Mood* currentMood;
+    ofEvent<Mood> moodChanged;
 
     ofColor getColorForBlobId(int blobId);
     void freeColorFromBlobId(int blobId);
@@ -55,6 +59,7 @@ public:
     void update();
     void draw();
     void printStatus();
+
 };
 
 #endif /* MoodsManager_hpp */

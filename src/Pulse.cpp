@@ -10,7 +10,7 @@
 #include "Settings.hpp"
 
 #define RANGE (50)
-#define SCALER (0.7f)
+#define SCALER (1.2f)
 
 Pulse::Pulse(string name): Follower(name) {
     offset = 0;

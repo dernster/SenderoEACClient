@@ -9,7 +9,7 @@
 #include "Behaviour.hpp"
 #include "Settings.hpp"
 
-ofVec3f Behaviour::intersect(ofVec3f src){
+Intersection Behaviour::intersect(ofVec3f src){
     /*Las posiciones relativas entre un rayo y una esfera son:
      *1. No se intersectan
      *2. El rayo es tangente a la esfera (Interseccion en 1 punto)
@@ -42,27 +42,22 @@ ofVec3f Behaviour::intersect(ofVec3f src){
     double discriminante = pow(b,2) - 4*(a*c);
     double t;
     
-    if (discriminante < 0){
-        //No hubo interseccion
-        return ofVec3f(0); // should never happen
-    } else {
-        //Hubo interseccion, determino si fue una o dos
+    Intersection intersection = {ofVec3f(0), ofVec3f(0)};
+
+    if (discriminante > 0){
         double t1 = (-b - sqrt(discriminante))/2;
-        //std::cout << "t1: " << t1 << std::endl;
         double t2 = ((-b + sqrt(discriminante))/2);
-        //Caso de interseccion doble, devuelvo la mas cercana al rayo
+
+        if (t1 > 0){
+            intersection.first = src + direction * t1;
+        }
         
-        if (t1 > 0){ //&& (t1 <= Constantes::UMBRAL_DOUBLE) && (objRef == this)){
-            t = t1;
-        } else if (t2 > 0){
-            t = t2;
-        }else{
-            return ofVec3f(0); // should never happen
+        if (t2 > 0){
+            intersection.second = src + direction * t2;
         }
     }
-    
-    ofVec3f punto = src + direction*t;
-    return punto;
+
+    return intersection;
 }
 
 Behaviour::Behaviour(string name){

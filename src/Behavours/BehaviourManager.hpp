@@ -12,19 +12,11 @@
 #include <stdio.h>
 #include <map>
 #include "Behaviour.hpp"
+#include "MoodsManager.hpp"
+#include "Settings.hpp"
 using namespace std;
 
 #define Behaviours (*BehaviourManager::getInstance())
-
-struct BehaviourTime {
-    string key;
-    float duration;
-};
-
-struct BehaviourComposer {
-    vector<BehaviourTime> descriptor;
-    int currentIndex;
-};
 
 class BehaviourManager {
 private:
@@ -38,6 +30,7 @@ public:
     static BehaviourManager* getInstance();
     void init();
     void update(const vector<Pixel*> & pixels);
+    void onMoodChange(Mood & mood);
 };
 
 #endif /* BehaviourManager_hpp */

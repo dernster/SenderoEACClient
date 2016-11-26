@@ -9,6 +9,9 @@
 #include "BehaviourManager.hpp"
 #include "Follower.hpp"
 #include "Pulse.hpp"
+#include "DoublePulse.hpp"
+#include "MoodsManager.hpp"
+#include "ofMain.h"
 
 BehaviourManager* BehaviourManager::instance = NULL;
 
@@ -20,21 +23,33 @@ BehaviourManager* BehaviourManager::getInstance(){
 }
 
 void BehaviourManager::init(){
+
+    // subscribe to events
+    ofAddListener(MoodsManager.moodChanged, this, &BehaviourManager::onMoodChange);
+//    ofAddListener(MoodsManager.moodChanged, this, &BehaviourManager::onMoodChange);
+
     behaviour["follower"] = new Follower("follower");
     behaviour["pulse"] = new Pulse("pulse");
+    behaviour["doublePulse"] = new DoublePulse("doublePulse");
 
     next = NULL;
-    
-    // default composer
-    BehaviourTime ftime = {"follower", 10};
-    BehaviourTime ptime = {"pulse", 10};
-    composer.descriptor = {ftime, ptime};
-    composer.currentIndex = 0;
-    current = behaviour["follower"];
+    current = NULL;
+
+//    // default composer
+//    BehaviourTime ftime = {"follower", 3};
+//    BehaviourTime ptime = {"pulse", 5};
+//    BehaviourTime dtime = {"doublePulse", 5};
+//    composer.descriptor = {ftime, ptime, dtime};
+//    composer.currentIndex = 0;
+//    current = behaviour["follower"];
     lastTime = -1;
+
 }
 
 void BehaviourManager::update(const vector<Pixel*> & pixels){
+    if (!current)
+        return;
+    
     if (lastTime == -1) {
         lastTime = ofGetElapsedTimef();
     }
@@ -63,5 +78,12 @@ void BehaviourManager::update(const vector<Pixel*> & pixels){
         current->blend(pixels, 1);
     }
 
+}
+
+void BehaviourManager::onMoodChange(Mood & mood){
+    // set behaviour
+    composer = Settings.getComposerWithMood(mood.id);
+    current = behaviour[composer.descriptor[0].key];
+    cout << current->name << endl;
 }
 

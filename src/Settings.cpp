@@ -62,6 +62,10 @@ SettingsManager::SettingsManager(){
             composer.descriptor.push_back(b);
         }
         
+        cout << name << endl;
+        cout << composer.descriptor[0].key << endl;
+        cout << composer.descriptor[1].key << endl;
+        cout << composer.descriptor[2].key << endl;
         moods.insert(std::pair<string,BehaviourComposer>(name, composer));
         
         settingsParser.popTag(); // behaviourComposer

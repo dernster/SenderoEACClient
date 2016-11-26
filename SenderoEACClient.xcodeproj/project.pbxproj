@@ -73,6 +73,7 @@
 		CF4768BB1DE7CE4F00FAF387 /* Follower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4768B91DE7CE4F00FAF387 /* Follower.cpp */; };
 		CF4768BE1DE7D3A400FAF387 /* BehaviourManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4768BC1DE7D3A400FAF387 /* BehaviourManager.cpp */; };
 		CF4768C11DE7E6C000FAF387 /* Pulse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4768BF1DE7E6C000FAF387 /* Pulse.cpp */; };
+		CF4768C51DE90B5700FAF387 /* DoublePulse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4768C31DE90B5700FAF387 /* DoublePulse.cpp */; };
 		CF5976C51DE50C7000607075 /* Settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF5976C31DE50C7000607075 /* Settings.cpp */; };
 		D60E54E7FD6E19BC8636E0D2 /* ofxUIRadio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D33A3E929B0B5D9C002E30E /* ofxUIRadio.cpp */; };
 		DF0C851B244C4C867CEA8806 /* ofxUICircleSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2556100026B425E8370BCF75 /* ofxUICircleSlider.cpp */; };
@@ -289,6 +290,8 @@
 		CF4768BD1DE7D3A400FAF387 /* BehaviourManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BehaviourManager.hpp; path = Behavours/BehaviourManager.hpp; sourceTree = "<group>"; };
 		CF4768BF1DE7E6C000FAF387 /* Pulse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pulse.cpp; sourceTree = "<group>"; };
 		CF4768C01DE7E6C000FAF387 /* Pulse.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Pulse.hpp; sourceTree = "<group>"; };
+		CF4768C31DE90B5700FAF387 /* DoublePulse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DoublePulse.cpp; path = Behavours/DoublePulse.cpp; sourceTree = "<group>"; };
+		CF4768C41DE90B5700FAF387 /* DoublePulse.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DoublePulse.hpp; path = Behavours/DoublePulse.hpp; sourceTree = "<group>"; };
 		CF5976C31DE50C7000607075 /* Settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Settings.cpp; sourceTree = "<group>"; };
 		CF5976C41DE50C7000607075 /* Settings.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Settings.hpp; sourceTree = "<group>"; };
 		CF73E1AF93352CF515E7C9F2 /* ofxUIEventArgs.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUIEventArgs.h; path = ../../../addons/ofxUI/src/ofxUIEventArgs.h; sourceTree = SOURCE_ROOT; };
@@ -602,6 +605,8 @@
 				CF4768BD1DE7D3A400FAF387 /* BehaviourManager.hpp */,
 				CF4768BF1DE7E6C000FAF387 /* Pulse.cpp */,
 				CF4768C01DE7E6C000FAF387 /* Pulse.hpp */,
+				CF4768C31DE90B5700FAF387 /* DoublePulse.cpp */,
+				CF4768C41DE90B5700FAF387 /* DoublePulse.hpp */,
 			);
 			name = Behaviours;
 			sourceTree = "<group>";
@@ -923,6 +928,7 @@
 				879A251454401BC0B6E4F238 /* OscTypes.cpp in Sources */,
 				9F5C6DD965B4F3A6DB5B88F8 /* ofxUI2DGraph.cpp in Sources */,
 				4B3ED367CA852D522E2EE996 /* ofxUI2DPad.cpp in Sources */,
+				CF4768C51DE90B5700FAF387 /* DoublePulse.cpp in Sources */,
 				CF4768B81DE7CBF200FAF387 /* Behaviour.cpp in Sources */,
 				F1E8DE8734BA6F69A5112FA8 /* ofxUIBaseDraws.cpp in Sources */,
 				C381F2B7CFD84C0E540EB4BC /* ofxUIBiLabelSlider.cpp in Sources */,

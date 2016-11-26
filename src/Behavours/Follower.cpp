@@ -10,7 +10,9 @@
 #include "Settings.hpp"
 #include "BlobManager.hpp"
 
-Follower::Follower(string name): Behaviour(name) { }
+Follower::Follower(string name): Behaviour(name) {
+    doubleIntersection = false;
+}
 
 void Follower::blend(const vector<Pixel*> & pixels, float alpha){
 
@@ -20,10 +22,10 @@ void Follower::blend(const vector<Pixel*> & pixels, float alpha){
         
         if (blobPos.distance(ofVec3f(0)) < Settings.BARCELONA_RADIUS)
             continue;
-        
-        ofVec3f intersection = intersect(blobPos);
 
-        float blobDist = blobDistance(blobPos, intersection);
+        Intersection intersection = intersect(blobPos);
+
+        float blobDist = blobDistance(blobPos, intersection.first);
         if (blobDist <= Settings.BLOB_DISTANCE_THRESHOLD){
             drawForBlob(blob, pixels, alpha, blobDist, intersection);
         }
@@ -39,19 +41,30 @@ ofVec3f Follower::getBlobPos(Blob* blob){
     return ofVec3f(blob->x, 0, blob->y);
 }
 
-void Follower::drawForBlob(Blob* blob, const vector<Pixel*> & pixels, float alpha, const float & blobDistance, const ofVec3f & intersection){
+void Follower::drawForBlob(Blob* blob, const vector<Pixel*> & pixels, float alpha, const float & blobDistance, const Intersection & intersection){
 
     for(int i = 0; i < pixels.size(); i++){
         Pixel* px = pixels[i];
         ofVec3f pxPosition = px->getPosition();
-        
+
         float distRadius = ofLerp(Settings.MIN_LIGHTING_RADIUS, Settings.MAX_LIGHTING_RADIUS, blobDistance/Settings.BLOB_DISTANCE_THRESHOLD);
-        float dist = pxPosition.distance(intersection);
+        float dist = pxPosition.distance(intersection.first);
         
         if (dist <= distRadius){
             float normalizedDist = 1 - dist/distRadius;
             ofColor c = blob->color;
             px->blendRGBA(c.r,c.g,c.b,255, alpha * ofLerp(0.1,1,normalizedDist));
+        }
+
+        if (doubleIntersection){
+            float distRadius = ofLerp(Settings.MAX_LIGHTING_RADIUS, Settings.MIN_LIGHTING_RADIUS, blobDistance/Settings.BLOB_DISTANCE_THRESHOLD);
+            float dist = pxPosition.distance(intersection.second);
+
+            if (dist <= distRadius){
+                float normalizedDist = 1 - dist/distRadius;
+                ofColor c = blob->color;
+                px->blendRGBA(c.r,c.g,c.b,255, alpha * ofLerp(0.1,1,normalizedDist));
+            }
         }
     }
 }

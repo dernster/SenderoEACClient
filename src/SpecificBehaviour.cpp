@@ -32,15 +32,12 @@ void SpecificBehaviour::setup(map<int,Pixel*>* iPixels, vector<Pixel*>* iPixelsF
     sphere.setPosition(0,0,0);
     
     movingSphere.setRadius(2);
-    
+
+    Behaviours.init();
     BlobManager.init();
     MoodsManager.init();
-<<<<<<< HEAD
     AudioManager.init();
-    BehaviourManager::init();
-=======
-    Behaviours.init();
->>>>>>> ca0d6c1... composer and basic behaviour interface
+
 }
 
 ofVec3f* SpecificBehaviour::intersect(ofVec3f src, ofVec3f direction){
@@ -120,36 +117,11 @@ void SpecificBehaviour::update(){
     MoodsManager.update();
     AudioManager.update();
 
-<<<<<<< HEAD
-    BehaviourManager::behaviour["pulse"]->blend(pixelsFast, 255);
-=======
     alph = (alph + 1) % 255;
     
     float b = alph / 255.f;
 
     Behaviours.update(*pixelsFast);
-
-//    // calculate pixel colors
->>>>>>> ca0d6c1... composer and basic behaviour interface
-//
-//    for(int b = 0; b < BlobManager.count(); b++){
-//        Blob* blob = BlobManager.blob(b);
-//        ofVec3f blobPos(blob->x, 0, blob->y);
-//
-//        if (blobPos.distance(ofVec3f(0)) < Settings.BARCELONA_RADIUS)
-//            continue;
-//        
-//        ofVec3f* intersection = intersect(blobPos, ofVec3f(0) - blobPos);
-//        if (!intersection)
-//            continue;
-//        
-//        inters = *intersection;
-//        float blobDistance = blobPos.distance(*intersection);
-//        if (blobDistance < Settings.BLOB_DISTANCE_THRESHOLD){
-//            calculatePixelColorsForBlob(blob, blobDistance, *intersection);
-//        }
-//        delete intersection;
-//    }
 }
 
 void SpecificBehaviour::calculatePixelColorsForBlob(Blob* blob, const float & blobDistance, const ofVec3f & intersection){
