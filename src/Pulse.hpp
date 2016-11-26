@@ -17,7 +17,7 @@ private:
     int offset;
     int sign;
 public:
-    Pulse();
+    Pulse(string name);
     virtual ofVec3f getBlobPos(Blob* blob);
     virtual float blobDistance(const ofVec3f & blobPos, const ofVec3f & intersection);
 };

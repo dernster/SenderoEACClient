@@ -7,11 +7,12 @@
 //
 
 #include "Pulse.hpp"
+#include "Settings.hpp"
 
 #define RANGE (50)
-#define SCALER (0.5f)
+#define SCALER (0.7f)
 
-Pulse::Pulse(){
+Pulse::Pulse(string name): Follower(name) {
     offset = 0;
     sign = 1;
 }
@@ -27,6 +28,13 @@ float Pulse::blobDistance(const ofVec3f & blobPos, const ofVec3f & intersection)
         sign = -sign;
     }
     float side = offset * SCALER;
-    side = side - (RANGE * SCALER)*.5;
-    return distance + side;
+    float halfSide = (RANGE * SCALER)*.5;
+    side = side - halfSide;
+    auto res = distance + side;
+    
+    if (distance - halfSide < 0) {
+        res += halfSide;
+    }
+
+    return MIN(MAX(res, 0), Settings.BLOB_DISTANCE_THRESHOLD);
 }

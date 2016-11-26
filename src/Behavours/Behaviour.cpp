@@ -65,3 +65,6 @@ ofVec3f Behaviour::intersect(ofVec3f src){
     return punto;
 }
 
+Behaviour::Behaviour(string name){
+    this->name = name;
+}

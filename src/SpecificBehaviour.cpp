@@ -34,7 +34,7 @@ void SpecificBehaviour::setup(map<int,Pixel*>* iPixels, vector<Pixel*>* iPixelsF
     
     BlobManager.init();
     MoodsManager.init();
-    BehaviourManager::init();
+    Behaviours.init();
 }
 
 ofVec3f* SpecificBehaviour::intersect(ofVec3f src, ofVec3f direction){
@@ -98,6 +98,8 @@ ofVec3f* SpecificBehaviour::intersect(ofVec3f src, ofVec3f direction){
 ofVec3f inters;
 
 void SpecificBehaviour::update(){
+    
+    static int alph = 0;
 
     vector<Pixel*>::iterator it = this->pixelsFast->begin();
     
@@ -111,7 +113,11 @@ void SpecificBehaviour::update(){
     BlobManager.update();
     MoodsManager.update();
 
-    BehaviourManager::behaviour["pulse"]->blend(pixelsFast, 255);
+    alph = (alph + 1) % 255;
+    
+    float b = alph / 255.f;
+
+    Behaviours.update(*pixelsFast);
 
 //    // calculate pixel colors
 //

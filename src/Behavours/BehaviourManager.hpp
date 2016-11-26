@@ -14,10 +14,30 @@
 #include "Behaviour.hpp"
 using namespace std;
 
+#define Behaviours (*BehaviourManager::getInstance())
+
+struct BehaviourTime {
+    string key;
+    float duration;
+};
+
+struct BehaviourComposer {
+    vector<BehaviourTime> descriptor;
+    int currentIndex;
+};
+
 class BehaviourManager {
+private:
+    static BehaviourManager* instance;
+    map<string, Behaviour*> behaviour;
+    Behaviour* current;
+    Behaviour* next;
+    BehaviourComposer composer;
+    float lastTime;
 public:
-    static map<string, Behaviour*> behaviour;
-    static void init();
+    static BehaviourManager* getInstance();
+    void init();
+    void update(const vector<Pixel*> & pixels);
 };
 
 #endif /* BehaviourManager_hpp */
