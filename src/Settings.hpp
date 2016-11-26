@@ -9,14 +9,28 @@
 #ifndef SettingsManager_hpp
 #define SettingsManager_hpp
 
+#include <stdio.h>
+#include "ofxXmlSettings.h"
+
 #define Settings (*SettingsManager::getInstance())
 
-#include <stdio.h>
+struct BehaviourTime {
+    string key;
+    float duration;
+};
+
+struct BehaviourComposer {
+    vector<BehaviourTime> descriptor;
+    int currentIndex;
+};
 
 class SettingsManager {
 private:
     SettingsManager();
     static SettingsManager* instance;
+    
+    ofxXmlSettings settingsParser;
+    map<string, BehaviourComposer> moods;
 public:
     static SettingsManager* getInstance();
 
@@ -33,6 +47,8 @@ public:
 
     float METERS_TO_COORD;
     float BARCELONA_RADIUS;
+    
+    BehaviourComposer getComposerWithMood(string mood);
 };
 
 #endif /* SettingsManager_hpp */
