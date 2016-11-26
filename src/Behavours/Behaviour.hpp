@@ -13,12 +13,17 @@
 #include "Pixel.h"
 #include <vector>
 
+struct Intersection {
+    ofVec3f first;
+    ofVec3f second;
+};
+
 class Behaviour {
 public:
     string name;
     Behaviour(string name);
     virtual void blend(const vector<Pixel*> & pixels, float alpha) = 0;
-    virtual ofVec3f intersect(ofVec3f src);
+    virtual Intersection intersect(ofVec3f src);
 };
 
 #endif /* Behaviour_hpp */

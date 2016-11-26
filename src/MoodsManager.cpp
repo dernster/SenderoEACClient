@@ -58,6 +58,9 @@ void MoodsManagerClass::update(){
                 // calculate colors for this mood
                 lastMoodId = currentMood->id;
                 updateColors();
+                ofNotifyEvent(moodChanged, currentMood);
+            } else {
+                ofNotifyEvent(moodChanged, currentMood);
             }
 
         // Transition message
@@ -87,8 +90,8 @@ void MoodsManagerClass::updateColors(){
         colorAndBlob.color.setHsb(hue, baseSaturation, baseValue);
     }
 
-    // notify color changes
-    BlobManager.reassignBlobColors();
+//    // notify color changes
+//    BlobManager.reassignBlobColors();
 
 }
 

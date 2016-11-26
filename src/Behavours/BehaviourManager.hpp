@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <map>
 #include "Behaviour.hpp"
+#include "MoodsManager.hpp"
 using namespace std;
 
 #define Behaviours (*BehaviourManager::getInstance())
@@ -38,6 +39,7 @@ public:
     static BehaviourManager* getInstance();
     void init();
     void update(const vector<Pixel*> & pixels);
+    void onMoodChange(Mood* mood);
 };
 
 #endif /* BehaviourManager_hpp */
