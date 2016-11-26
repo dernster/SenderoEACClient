@@ -28,10 +28,10 @@ void GenericClientManager::setup(){
     if(useServer){
         this->tcpClient.setup(this->serverIP, this->serverTCPPort);
         this->configureFromServer();
-        this->udpManager.Create();
-        this->udpManager.Connect(this->serverIP.data(),this->UDPPort);
-        this->udpManager.SetNonBlocking(true);
     }
+    this->udpManager.Create();
+    this->udpManager.Connect(this->serverIP.data(),this->UDPPort);
+    this->udpManager.SetNonBlocking(true);
     
     this->transmitEnabled = true;
     
@@ -70,7 +70,7 @@ void GenericClientManager::update(){
     
     this->specific->update();
     
-    if (transmitEnabled && useServer){
+    if (transmitEnabled) { // && useServer){
         transmitFrame();
     }
     
@@ -296,7 +296,7 @@ void GenericClientManager::configureFromServer(){
                     
                     TiXmlElement* render=pixel->FirstChildElement();
                     if (!render){
-                        return -1;
+                        return;
                     }
                     
                     string meshName= "mesh";
@@ -305,7 +305,7 @@ void GenericClientManager::configureFromServer(){
                         linkedMesh=render->Attribute("mesh");
                     }
                     else{
-                        return -1;
+                        return;
                     }
                     
                     ofVec3f front;
@@ -314,17 +314,17 @@ void GenericClientManager::configureFromServer(){
                     
                     TiXmlElement* frontElement=render->FirstChildElement();
                     if (!frontElement){
-                        return -1;
+                        return;
                     }
                     
                     TiXmlElement* upElement=frontElement->NextSiblingElement();
                     if (!upElement){
-                        return -1;
+                        return;
                     }
                     
                     TiXmlElement* positionElement=upElement->NextSiblingElement();
                     if (!positionElement){
-                        return -1;
+                        return;
                     }
                     
                     string xName = "x";
@@ -524,6 +524,14 @@ int GenericClientManager::loadFromXML(){
 		else{
 			this->useServer = false;
 		}
+
+        string udpPort = "UDPPort";
+        if(config->Attribute(udpPort.c_str())){
+            this->UDPPort = ofToInt(config->Attribute("UDPPort"));
+        }
+        else{
+            this->UDPPort = false;
+        }        
         
         //meshes
         for( mesh; mesh; mesh=mesh->NextSiblingElement())
