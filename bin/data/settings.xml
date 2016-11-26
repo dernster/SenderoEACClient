@@ -1,0 +1,42 @@
+<!-- Settings for EAC Barcelona Client -->
+<!-- For float in (0,1) use .X notation -->
+<?xml version="1.0" ?>
+<settings>
+	<!-- Common -->
+	<common>
+	    <barcelonaDiameter>1.5</barcelonaDiameter>
+	    <metersToCoord>160</metersToCoord>
+	    <barcelonaBase>0.4</barcelonaBase>
+	    <roomWidth>4</roomWidth>
+	    <roomDepth>4</roomDepth>
+	    <blobDistanceThreshold>1</blobDistanceThreshold>
+	    <minLightingRadius>0.2</minLightingRadius>
+	    <maxLightingRadius>1.2</maxLightingRadius>
+	    <maxBlobs>2</maxBlobs>
+	</common>
+
+	<!-- Moods -->
+	<moods a='1'>
+		<mood name="ruido">
+			<behaviourComposer>
+				<behaviourTime key="a1" duration="1.5"></behaviourTime>
+				<behaviourTime key="b1" duration="2.5"></behaviourTime>
+				<behaviourTime key="c1" duration="3.5"></behaviourTime>
+			</behaviourComposer>
+		</mood>
+		<mood name="flash">
+			<behaviourComposer>
+				<behaviourTime key="a2" duration="1.5"></behaviourTime>
+				<behaviourTime key="b2" duration="2.5"></behaviourTime>
+				<behaviourTime key="c2" duration="3.5"></behaviourTime>
+			</behaviourComposer>
+		</mood>
+		<mood name="noise">
+			<behaviourComposer>
+				<behaviourTime key="a3" duration="1.5"></behaviourTime>
+				<behaviourTime key="b3" duration="2.5"></behaviourTime>
+				<behaviourTime key="c3" duration="3.5"></behaviourTime>
+			</behaviourComposer>
+		</mood>
+	</moods>
+</settings>
