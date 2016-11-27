@@ -35,18 +35,12 @@ void BehaviourManager::init(){
     next = NULL;
     current = NULL;
 
-//    // default composer
-//    BehaviourTime ftime = {"follower", 3};
-//    BehaviourTime ptime = {"pulse", 5};
-//    BehaviourTime dtime = {"doublePulse", 5};
-//    composer.descriptor = {ftime, ptime, dtime};
-//    composer.currentIndex = 0;
-//    current = behaviour["follower"];
     lastTime = -1;
 
 }
 
 void BehaviourManager::update(const vector<Pixel*> & pixels){
+    static float alp = 0;
     if (!current)
         return;
     
@@ -65,17 +59,23 @@ void BehaviourManager::update(const vector<Pixel*> & pixels){
             auto nextKey = composer.descriptor[nextIndex].key;
             composer.currentIndex = nextIndex;
             next = behaviour[nextKey];
+            alp = 0;
         }
 
         current->blend(pixels, 1);
             
     } else { // transition
-        
-        lastTime = currentTime;
-        current = next;
-        next = NULL;
 
-        current->blend(pixels, 1);
+        next->blend(pixels, alp);
+        current->blend(pixels, 1 - alp);
+
+        alp += 0.2;
+
+        if (alp >= 1) {
+            lastTime = currentTime;
+            current = next;
+            next = NULL;
+        }
     }
 
 }
@@ -84,6 +84,5 @@ void BehaviourManager::onMoodChange(Mood & mood){
     // set behaviour
     composer = Settings.getComposerWithMood(mood.id);
     current = behaviour[composer.descriptor[0].key];
-    cout << current->name << endl;
 }
 
