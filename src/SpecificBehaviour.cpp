@@ -13,6 +13,7 @@
 #include "AudioManager.hpp"
 #include "Settings.hpp"
 #include "BehaviourManager.hpp"
+#include "Variables.hpp"
 
 SpecificBehaviour::SpecificBehaviour(){
     
@@ -37,6 +38,7 @@ void SpecificBehaviour::setup(map<int,Pixel*>* iPixels, vector<Pixel*>* iPixelsF
     BlobManager.init();
     MoodsManager.init();
     AudioManager.init();
+    Variables.init();
 
 }
 

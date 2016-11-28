@@ -19,7 +19,7 @@ private:
 public:
     Pulse(string name);
     virtual ofVec3f getBlobPos(Blob* blob);
-    virtual float blobDistance(const ofVec3f & blobPos, const ofVec3f & intersection);
+    virtual float blobDistance(Blob* blob, const ofVec3f & blobPos, const ofVec3f & intersection);
 };
 
 #endif /* Pulse_hpp */

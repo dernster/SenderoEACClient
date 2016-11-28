@@ -43,6 +43,15 @@ public:
     float MIN_LIGHTING_RADIUS;
     float MAX_LIGHTING_RADIUS;
     int MAX_BLOBS;
+
+    // news
+    float BLOB_PULSE_MAX_OFFSET;
+    
+    //---- INPUTS
+    float BLOB_PULSE_DISTANCE_OFFSET;
+    float BLOB_ALPHA;
+    float BLOB_PULSE_VELOCITY;
+
     // end xml
 
     float METERS_TO_COORD;

@@ -25,7 +25,7 @@ void Follower::blend(const vector<Pixel*> & pixels, float alpha){
 
         Intersection intersection = intersect(blobPos);
 
-        float blobDist = blobDistance(blobPos, intersection.first);
+        float blobDist = blobDistance(blob, blobPos, intersection.first);
         if (blobDist <= Settings.BLOB_DISTANCE_THRESHOLD){
             drawForBlob(blob, pixels, alpha, blobDist, intersection);
         }
@@ -33,7 +33,7 @@ void Follower::blend(const vector<Pixel*> & pixels, float alpha){
 
 }
 
-float Follower::blobDistance(const ofVec3f & blobPos, const ofVec3f & intersection){
+float Follower::blobDistance(Blob* blob, const ofVec3f & blobPos, const ofVec3f & intersection){
     return blobPos.distance(intersection);
 }
 

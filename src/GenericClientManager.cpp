@@ -180,6 +180,14 @@ void GenericClientManager::transmitFrame(){
 
 void GenericClientManager::keyPressed(int key){
     specific->keyPressed(key);
+    
+    if (key == 'p') {
+        angle += 1;
+    } else if (key == 'o') {
+        angle -= 1;
+    }
+    
+    ofLogNotice() << angle << endl;
 }
 
 
@@ -735,18 +743,24 @@ int GenericClientManager::loadFromXML(){
                 else{
                     zPos=0.0f;
                 }
-               
+
+                ofVec3f axis(1,0,0);
+                float angle = -64 * (M_PI / 180);//-M_PI/2;
+
                 positionPixel.x = xPos;
                 positionPixel.y = yPos;
                 positionPixel.z = zPos;
+                positionPixel = positionPixel.rotateRad(angle, axis);
                 
                 front.x = xFront;
                 front.y = yFront;
                 front.z= zFront;
+                front = front.rotateRad(angle, axis);
                 
                 up.x = xUp;
                 up.y = yUp;
                 up.z = zUp;
+                up = up.rotateRad(angle, axis);
                 
                 Pixel* newPixel = new Pixel(id,r,g,b,a,positionPixel);
                 
@@ -846,8 +860,12 @@ void GenericClientManager::draw()
     if (enableDraw){
         cam.begin();
         
+        
+        
         if (showAxis){
             //axis
+            ofPushMatrix();
+            ofRotate(-64, 1, 0, 0);
             ofSetColor(255,0,0);
             ofSetLineWidth(3);
             ofLine(0, 0, 0, 100, 0, 0);
@@ -855,6 +873,7 @@ void GenericClientManager::draw()
             ofLine(0, 0, 0, 0, 100, 0);
             ofSetColor(0,0,255);
             ofLine(0, 0, 0, 0, 0, 100);
+            ofPopMatrix();
             //axis
         }
         glPushMatrix();
@@ -870,6 +889,8 @@ void GenericClientManager::draw()
         }
         specific->draw();
         glPopMatrix();
+
+        
 
         cam.end();
     }

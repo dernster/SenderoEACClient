@@ -69,6 +69,7 @@
 		C4782ECC372420ACE0615B74 /* OscPrintReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC8881B3C8C0A1C45F042E7A /* OscPrintReceivedElements.cpp */; };
 		C961BE22AB9A8CCF037FC18F /* ofxUITextArea.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBE31D52BCB0CE44B9D154F0 /* ofxUITextArea.cpp */; };
 		CE5D89B9893EAA12F511DCAC /* ofxUIWidgetWithLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5AD807D1AF254F978AB20B1C /* ofxUIWidgetWithLabel.cpp */; };
+		CF0E84E01DEA8F1800CAB1A6 /* Variables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF0E84DE1DEA8F1800CAB1A6 /* Variables.cpp */; };
 		CF4768B81DE7CBF200FAF387 /* Behaviour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4768B61DE7CBF200FAF387 /* Behaviour.cpp */; };
 		CF4768BB1DE7CE4F00FAF387 /* Follower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4768B91DE7CE4F00FAF387 /* Follower.cpp */; };
 		CF4768BE1DE7D3A400FAF387 /* BehaviourManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF4768BC1DE7D3A400FAF387 /* BehaviourManager.cpp */; };
@@ -282,6 +283,8 @@
 		C7B4B8AD9464A693A3683D0F /* ofxUISpacer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUISpacer.h; path = ../../../addons/ofxUI/src/ofxUISpacer.h; sourceTree = SOURCE_ROOT; };
 		C8C9B823D7872F9CBF03A813 /* ofxTCPClient.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxTCPClient.h; path = ../../../addons/ofxNetwork/src/ofxTCPClient.h; sourceTree = SOURCE_ROOT; };
 		CCEC29A4351C40BA86F2E491 /* ofxUIMinimalSlider.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUIMinimalSlider.h; path = ../../../addons/ofxUI/src/ofxUIMinimalSlider.h; sourceTree = SOURCE_ROOT; };
+		CF0E84DE1DEA8F1800CAB1A6 /* Variables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Variables.cpp; sourceTree = "<group>"; };
+		CF0E84DF1DEA8F1800CAB1A6 /* Variables.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Variables.hpp; sourceTree = "<group>"; };
 		CF4768B61DE7CBF200FAF387 /* Behaviour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Behaviour.cpp; path = Behavours/Behaviour.cpp; sourceTree = "<group>"; };
 		CF4768B71DE7CBF200FAF387 /* Behaviour.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Behaviour.hpp; path = Behavours/Behaviour.hpp; sourceTree = "<group>"; };
 		CF4768B91DE7CE4F00FAF387 /* Follower.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Follower.cpp; path = Behavours/Follower.cpp; sourceTree = "<group>"; };
@@ -594,6 +597,15 @@
 			name = libs;
 			sourceTree = "<group>";
 		};
+		CF0E84DD1DEA8E6F00CAB1A6 /* Variables */ = {
+			isa = PBXGroup;
+			children = (
+				CF0E84DE1DEA8F1800CAB1A6 /* Variables.cpp */,
+				CF0E84DF1DEA8F1800CAB1A6 /* Variables.hpp */,
+			);
+			name = Variables;
+			sourceTree = "<group>";
+		};
 		CF4768B51DE7CB6400FAF387 /* Behaviours */ = {
 			isa = PBXGroup;
 			children = (
@@ -745,6 +757,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				CF0E84DD1DEA8E6F00CAB1A6 /* Variables */,
 				CF4768B51DE7CB6400FAF387 /* Behaviours */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				7262701A956AC95B9D57AE70 /* BlobManager.cpp */,
@@ -935,6 +948,7 @@
 				7D393646FB859A930EF58917 /* ofxUIButton.cpp in Sources */,
 				7BE46522B64E24FAEDE1A25D /* ofxUICanvas.cpp in Sources */,
 				DF0C851B244C4C867CEA8806 /* ofxUICircleSlider.cpp in Sources */,
+				CF0E84E01DEA8F1800CAB1A6 /* Variables.cpp in Sources */,
 				9BE4AE0AA2B8C436BDFE9D4D /* ofxUIDragableLabelButton.cpp in Sources */,
 				F392A99D83698FC099127880 /* ofxUIDropDownList.cpp in Sources */,
 				084025DA517D8329301FE1B6 /* ofxUIEventArgs.cpp in Sources */,

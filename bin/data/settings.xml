@@ -6,12 +6,12 @@
 	<common>
 	    <barcelonaDiameter>1.5</barcelonaDiameter>
 	    <metersToCoord>160</metersToCoord>
-	    <barcelonaBase>0.4</barcelonaBase>
-	    <roomWidth>4</roomWidth>
-	    <roomDepth>4</roomDepth>
-	    <blobDistanceThreshold>1</blobDistanceThreshold>
+	    <barcelonaBase>0.9</barcelonaBase>
+	    <roomWidth>5</roomWidth>
+	    <roomDepth>3.8</roomDepth>
+	    <blobDistanceThreshold>2</blobDistanceThreshold>
 	    <minLightingRadius>0.2</minLightingRadius>
-	    <maxLightingRadius>1.2</maxLightingRadius>
+	    <maxLightingRadius>1</maxLightingRadius>
 	    <maxBlobs>2</maxBlobs>
 	</common>
 

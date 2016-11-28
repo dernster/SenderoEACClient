@@ -32,7 +32,13 @@ SettingsManager::SettingsManager(){
     MIN_LIGHTING_RADIUS = CONVERT(settingsParser.getValue("settings:common:minLightingRadius", 0.2));
     MAX_LIGHTING_RADIUS = CONVERT(settingsParser.getValue("settings:common:maxLightingRadius", 1.2));
     MAX_BLOBS = settingsParser.getValue("settings:common:maxBlobs", 2);
-    
+
+    BLOB_PULSE_MAX_OFFSET = 25;
+
+    BLOB_PULSE_DISTANCE_OFFSET = 25;
+    BLOB_ALPHA = 1;
+    BLOB_PULSE_VELOCITY = 1;
+
     // Computed
     BARCELONA_RADIUS = BARCELONA_DIAMETER / 2;
     

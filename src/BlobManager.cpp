@@ -54,7 +54,7 @@ void BlobManagerClass::update() {
 
             // convert to coord space
             newBlobData->x = (normalize(newBlobData->x) - .5) * Settings.ROOM_WIDTH;
-            newBlobData->y = (normalize(newBlobData->y) - .5) * Settings.ROOM_DEPTH;
+            newBlobData->y = ((1 - normalize(newBlobData->y)) - .5) * Settings.ROOM_DEPTH;
             newBlobData->size = normalize(newBlobData->size);
 
             addOrUpdateBlob(newBlobData);

@@ -62,6 +62,8 @@ private:
     
     ofEasyCam cam;
     
+    float angle;
+    
     float minX;
     float maxX;
     float minY;
