@@ -42,12 +42,12 @@ void BlobManagerClass::update() {
         receiver.getNextMessage(m);
         
         // Check for blob messages
-        if(m.getAddress() == "/blob"){
+        if(m.getAddress() == "/blob/updated"){
             Blob *newBlobData =  new Blob();
             newBlobData->id = m.getArgAsInt32(0);
             newBlobData->x = m.getArgAsFloat(1);
             newBlobData->y = m.getArgAsFloat(2);
-            newBlobData->size = m.getArgAsFloat(3);
+            newBlobData->size = 0.3;//m.getArgAsFloat(3);
             newBlobData->time = ofGetElapsedTimef();
             newBlobData->startAlpha = 0.0f;
             newBlobData->audioValue = 1.0f;

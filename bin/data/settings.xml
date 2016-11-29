@@ -20,8 +20,8 @@
 		<mood name="ruido">
 			<behaviourComposer>
 				<behaviourTime key="follower" duration="3"></behaviourTime>
-				<behaviourTime key="pulse" duration="3"></behaviourTime>
-				<behaviourTime key="doublePulse" duration="5"></behaviourTime>
+<!--				<behaviourTime key="pulse" duration="3"></behaviourTime>-->
+<!--				<behaviourTime key="doublePulse" duration="5"></behaviourTime>-->
 			</behaviourComposer>
 		</mood>
 		<mood name="flash">
