@@ -38,7 +38,9 @@ float Follower::blobDistance(Blob* blob, const ofVec3f & blobPos, const ofVec3f 
 }
 
 ofVec3f Follower::getBlobPos(Blob* blob){
-    return ofVec3f(blob->x, 0, blob->y);
+    ofVec2f pos(blob->x, blob->y);
+    auto filtered = blob->posFilter.update(pos);
+    return ofVec3f(filtered.x, 0, filtered.y);
 }
 
 void Follower::drawForBlob(Blob* blob, const vector<Pixel*> & pixels, float alpha, const float & blobDistance, const Intersection & intersection){

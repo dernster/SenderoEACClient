@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "ofxOsc.h"
+#include "ofxBiquadFilter.h"
 
 #define EXPIRATION_TIME 0.1
 #define OSC_PORT_BLOBS 12345
@@ -26,6 +27,11 @@ struct Blob {
     float startAlpha;
     ofColor color;
     float audioValue;
+    
+    // filters
+    ofxBiquadFilter1f audioFilter;
+    ofxBiquadFilter2f posFilter;
+
 };
 
 class BlobManagerClass {

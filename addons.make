@@ -1,4 +1,5 @@
 ofxAssimpModelLoader
+ofxBiquadFilter
 ofxNetwork
 ofxOsc
 ofxUI

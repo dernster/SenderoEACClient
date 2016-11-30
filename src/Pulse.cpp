@@ -35,7 +35,9 @@ float Pulse::blobDistance(Blob* blob, const ofVec3f & blobPos, const ofVec3f & i
         side = side - halfSide;
     } else {
         // mapping from audio source
-        auto offset = Variables.get(V_BLOB_PULSE_DISTANCE_OFFSET, blob);
+        auto audioValue = Variables.get(V_BLOB_PULSE_DISTANCE_OFFSET, blob);
+        blob->audioFilter.update(audioValue);
+        float offset = blob->audioFilter.value();
         cout << "offset = " << offset << endl;
         side = offset * Settings.BLOB_PULSE_MAX_OFFSET;
         

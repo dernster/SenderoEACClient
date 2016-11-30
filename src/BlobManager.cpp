@@ -51,6 +51,8 @@ void BlobManagerClass::update() {
             newBlobData->time = ofGetElapsedTimef();
             newBlobData->startAlpha = 0.0f;
             newBlobData->audioValue = 1.0f;
+            newBlobData->audioFilter.setFc(0.1);
+            newBlobData->posFilter.setFc(0.1);
 
             // convert to coord space
             newBlobData->x = (normalize(newBlobData->x) - .5) * Settings.ROOM_WIDTH;
@@ -78,6 +80,8 @@ void BlobManagerClass::addOrUpdateBlob(Blob *b){
     if (i < blobs.size()){
         b->startAlpha = blobs[i]->startAlpha;
         b->color = blobs[i]->color;
+        b->audioFilter = blobs[i]->audioFilter;
+        b->posFilter = blobs[i]->posFilter;
         delete blobs[i];
         blobs[i] = b;
     } else {
