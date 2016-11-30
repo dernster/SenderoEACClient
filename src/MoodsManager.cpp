@@ -71,7 +71,8 @@ void MoodsManagerClass::update(){
                 updateColors();
                 ofNotifyEvent(moodChanged, *currentMood);
             } else {
-                ofNotifyEvent(moodChanged, *currentMood);
+                updateColors();
+                ofNotifyEvent(moodUpdate, *currentMood);
             }
 
         // Transition message
@@ -100,9 +101,6 @@ void MoodsManagerClass::updateColors(){
         ColorAndBlob& colorAndBlob = colors[i];
         colorAndBlob.color.setHsb(hue, baseSaturation, baseValue);
     }
-
-//    // notify color changes
-//    BlobManager.reassignBlobColors();
 
 }
 

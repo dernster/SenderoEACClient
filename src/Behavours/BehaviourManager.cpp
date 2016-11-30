@@ -26,7 +26,6 @@ void BehaviourManager::init(){
 
     // subscribe to events
     ofAddListener(MoodsManager.moodChanged, this, &BehaviourManager::onMoodChange);
-//    ofAddListener(MoodsManager.moodChanged, this, &BehaviourManager::onMoodChange);
 
     behaviour["follower"] = new Follower("follower");
     behaviour["pulse"] = new Pulse("pulse");

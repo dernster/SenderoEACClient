@@ -31,6 +31,13 @@ void VariablesClass::init(){
         0,
         1,
     };
+
+    connectors[V_BLOB_ALPHA] = {
+        S_BLOB_AUDIO_VALUE,
+        0.5,
+        0.5,
+        1,
+    };
 }
 
 float VariablesClass::get(const string & key, Blob* blob){

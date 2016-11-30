@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "ofxOsc.h"
 #include "ofxBiquadFilter.h"
+#include "MoodsManager.hpp"
 
 #define EXPIRATION_TIME 0.1
 #define OSC_PORT_BLOBS 12345
@@ -66,6 +67,7 @@ public:
     void reassignBlobColors();
     void printStatus();
     void setAudioValue(int id, float value);
+    void onMoodUpdate(Mood & mood);
 };
 
 #endif /* BlobManager_hpp */

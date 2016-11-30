@@ -44,7 +44,7 @@ private:
     MoodTransition* transition;
     string lastMoodId;
     
-    ofEvent<Mood*> moodUpdate;
+    
 
     MoodsManagerClass();
     void updateColors();
@@ -52,7 +52,8 @@ public:
     static MoodsManagerClass* instance();
     Mood* currentMood;
     ofEvent<Mood> moodChanged;
-
+    ofEvent<Mood> moodUpdate;
+    
     ofColor getColorForBlobId(int blobId);
     void freeColorFromBlobId(int blobId);
     void init();

@@ -9,6 +9,7 @@
 #include "Follower.hpp"
 #include "Settings.hpp"
 #include "BlobManager.hpp"
+#include "Variables.hpp"
 
 Follower::Follower(string name): Behaviour(name) {
     doubleIntersection = false;
@@ -52,10 +53,12 @@ void Follower::drawForBlob(Blob* blob, const vector<Pixel*> & pixels, float alph
         float distRadius = ofLerp(Settings.MIN_LIGHTING_RADIUS, Settings.MAX_LIGHTING_RADIUS, blobDistance/Settings.BLOB_DISTANCE_THRESHOLD);
         float dist = pxPosition.distance(intersection.first);
         
+        auto alphaVar = Variables.get(V_BLOB_ALPHA, blob);
+
         if (dist <= distRadius){
             float normalizedDist = 1 - dist/distRadius;
             ofColor c = blob->color;
-            px->blendRGBA(c.r,c.g,c.b,255, alpha * ofLerp(0.1,1,normalizedDist));
+            px->blendRGBA(c.r,c.g,c.b,255, alphaVar * alpha * ofLerp(0.1,1,normalizedDist));
         }
 
         if (doubleIntersection){
@@ -65,7 +68,7 @@ void Follower::drawForBlob(Blob* blob, const vector<Pixel*> & pixels, float alph
             if (dist <= distRadius){
                 float normalizedDist = 1 - dist/distRadius;
                 ofColor c = blob->color;
-                px->blendRGBA(c.r,c.g,c.b,255, alpha * ofLerp(0.1,1,normalizedDist));
+                px->blendRGBA(c.r,c.g,c.b,255, alphaVar * alpha * ofLerp(0.1,1,normalizedDist));
             }
         }
     }

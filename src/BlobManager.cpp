@@ -28,6 +28,11 @@ BlobManagerClass* BlobManagerClass::instance() {
 void BlobManagerClass::init() {
     // OSC receiver for Blobs
     receiver.setup(OSC_PORT_BLOBS);
+    ofAddListener(MoodsManager.moodUpdate, this, &BlobManagerClass::onMoodUpdate);
+}
+
+void BlobManagerClass::onMoodUpdate(Mood & mood){
+    reassignBlobColors();
 }
 
 #define normalize(x) (MIN(MAX((x), 0),1))
