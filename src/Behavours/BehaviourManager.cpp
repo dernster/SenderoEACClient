@@ -83,6 +83,7 @@ void BehaviourManager::update(const vector<Pixel*> & pixels){
 void BehaviourManager::onMoodChange(Mood & mood){
     // set behaviour
     composer = Settings.getComposerWithMood(mood.id);
+    composer.currentIndex = 0;
     current = behaviour[composer.descriptor[0].key];
 }
 

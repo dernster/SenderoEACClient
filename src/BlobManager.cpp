@@ -42,7 +42,7 @@ void BlobManagerClass::update() {
         receiver.getNextMessage(m);
         
         // Check for blob messages
-        if(m.getAddress() == "/blob/updated"){
+        if(m.getAddress() == "/blob"){ ///updated
             Blob *newBlobData =  new Blob();
             newBlobData->id = m.getArgAsInt32(0);
             newBlobData->x = m.getArgAsFloat(1);

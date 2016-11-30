@@ -34,7 +34,7 @@ void AudioManagerClass::update(){
         // Blob sound message
         if(m.getAddress() == "/blobAudio"){
             int id = m.getArgAsInt32(0);
-            float value = m.getArgAsFloat(1);
+            float value = MIN(MAX(m.getArgAsFloat(1),0), 1);
             BlobManager.setAudioValue(id, value);
         // Background sound message
         } else if(m.getAddress() == "/backgroundAudio"){

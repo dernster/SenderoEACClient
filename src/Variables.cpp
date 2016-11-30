@@ -18,19 +18,19 @@ VariablesClass* VariablesClass::getInstance(){
 }
 
 void VariablesClass::init(){
-    connectors[V_BLOB_PULSE_DISTANCE_OFFSET] = {
-        S_SETTINGS,
-        1,
-        1,
-        Settings.BLOB_PULSE_DISTANCE_OFFSET
-    };
-    
 //    connectors[V_BLOB_PULSE_DISTANCE_OFFSET] = {
-//        S_BLOB_AUDIO_VALUE,
+//        S_SETTINGS,
 //        1,
 //        1,
-//        1,
+//        Settings.BLOB_PULSE_DISTANCE_OFFSET
 //    };
+
+    connectors[V_BLOB_PULSE_DISTANCE_OFFSET] = {
+        S_BLOB_AUDIO_VALUE,
+        1,
+        0,
+        1,
+    };
 }
 
 float VariablesClass::get(const string & key, Blob* blob){

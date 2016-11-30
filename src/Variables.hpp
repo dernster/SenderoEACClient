@@ -31,8 +31,8 @@ using namespace std;
 
 struct Connector {
     string sourceId;
-    float offset;
     float scaler;
+    float offset;
     float defaultValue;
 };
 

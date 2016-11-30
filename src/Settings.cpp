@@ -22,7 +22,7 @@ SettingsManager::SettingsManager(){
     BARCELONA_DIAMETER = settingsParser.getValue("settings:common:barcelonaDiameter", 1.5);
     int metersToCoordTemp = settingsParser.getValue("settings:common:metersToCoord", 160);
     METERS_TO_COORD = metersToCoordTemp / BARCELONA_DIAMETER;
-    
+        
     BARCELONA_DIAMETER = CONVERT(BARCELONA_DIAMETER);
     
     BARCELONA_BASE = CONVERT(settingsParser.getValue("settings:common:barcelonaBase", 0.4));
@@ -33,9 +33,9 @@ SettingsManager::SettingsManager(){
     MAX_LIGHTING_RADIUS = CONVERT(settingsParser.getValue("settings:common:maxLightingRadius", 1.2));
     MAX_BLOBS = settingsParser.getValue("settings:common:maxBlobs", 2);
 
-    BLOB_PULSE_MAX_OFFSET = 25;
+    BLOB_PULSE_MAX_OFFSET = 120;
 
-    BLOB_PULSE_DISTANCE_OFFSET = 25;
+    BLOB_PULSE_DISTANCE_OFFSET = 50;
     BLOB_ALPHA = 1;
     BLOB_PULSE_VELOCITY = 1;
 
@@ -70,8 +70,6 @@ SettingsManager::SettingsManager(){
         
         cout << name << endl;
         cout << composer.descriptor[0].key << endl;
-        cout << composer.descriptor[1].key << endl;
-        cout << composer.descriptor[2].key << endl;
         moods.insert(std::pair<string,BehaviourComposer>(name, composer));
         
         settingsParser.popTag(); // behaviourComposer
