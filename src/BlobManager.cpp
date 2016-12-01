@@ -47,7 +47,7 @@ void BlobManagerClass::update() {
         receiver.getNextMessage(m);
         
         // Check for blob messages
-        if(m.getAddress() == "/blob"){ ///updated
+        if(m.getAddress() == "/blob/updated"){ //
             Blob *newBlobData =  new Blob();
             newBlobData->id = m.getArgAsInt32(0);
             newBlobData->x = m.getArgAsFloat(1);
@@ -56,8 +56,8 @@ void BlobManagerClass::update() {
             newBlobData->time = ofGetElapsedTimef();
             newBlobData->startAlpha = 0.0f;
             newBlobData->audioValue = 1.0f;
-            newBlobData->audioFilter.setFc(0.1);
-            newBlobData->posFilter.setFc(0.1);
+            newBlobData->audioFilter.setFc(Settings.BLOB_AUDIO_FC);
+            newBlobData->posFilter.setFc(Settings.BLOB_POSITION_FC);
 
             // convert to coord space
             newBlobData->x = (normalize(newBlobData->x) - .5) * Settings.ROOM_WIDTH;
