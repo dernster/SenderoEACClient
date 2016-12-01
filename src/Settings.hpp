@@ -24,6 +24,11 @@ struct BehaviourComposer {
     int currentIndex;
 };
 
+struct AudioConnector {
+    float scaler;
+    float offset;
+};
+
 class SettingsManager {
 private:
     SettingsManager();
@@ -43,6 +48,12 @@ public:
     float MIN_LIGHTING_RADIUS;
     float MAX_LIGHTING_RADIUS;
     int MAX_BLOBS;
+
+    AudioConnector AUDIO_ALPHA;
+    AudioConnector AUDIO_RADIUS;
+    
+    float BLOB_POSITION_FC;
+    float BLOB_AUDIO_FC;
 
     // news
     float BLOB_PULSE_MAX_OFFSET;

@@ -24,7 +24,7 @@ SettingsManager::SettingsManager(){
     METERS_TO_COORD = metersToCoordTemp / BARCELONA_DIAMETER;
         
     BARCELONA_DIAMETER = CONVERT(BARCELONA_DIAMETER);
-    
+
     BARCELONA_BASE = CONVERT(settingsParser.getValue("settings:common:barcelonaBase", 0.4));
     ROOM_WIDTH = CONVERT(settingsParser.getValue("settings:common:roomWidth", 4));
     ROOM_DEPTH = CONVERT(settingsParser.getValue("settings:common:roomDepth", 4));
@@ -33,8 +33,20 @@ SettingsManager::SettingsManager(){
     MAX_LIGHTING_RADIUS = CONVERT(settingsParser.getValue("settings:common:maxLightingRadius", 1.2));
     MAX_BLOBS = settingsParser.getValue("settings:common:maxBlobs", 2);
 
-    BLOB_PULSE_MAX_OFFSET = 120;
+    BLOB_PULSE_MAX_OFFSET = settingsParser.getValue("settings:common:blobPulseMaxOffset", 120);
 
+    float audioAlphaScaler = settingsParser.getValue("settings:audioAlpha:scaler", 1.f);
+    float audioAlphaOffset = settingsParser.getValue("settings:audioAlpha:offset", 0.f);
+    AUDIO_ALPHA = {audioAlphaScaler, audioAlphaOffset};
+
+    float audioRadiusScaler = settingsParser.getValue("settings:audioRadius:scaler", 1.f);
+    float audioRadiusOffset = settingsParser.getValue("settings:audioRadius:offset", 0.f);
+    AUDIO_RADIUS = {audioRadiusScaler, audioRadiusOffset};
+
+    BLOB_POSITION_FC = settingsParser.getValue("settings:blobPositionFilter", 0.1f);
+    BLOB_AUDIO_FC = settingsParser.getValue("settings:blobAudioFilter", 0.1f);
+
+    // not used
     BLOB_PULSE_DISTANCE_OFFSET = 50;
     BLOB_ALPHA = 1;
     BLOB_PULSE_VELOCITY = 1;

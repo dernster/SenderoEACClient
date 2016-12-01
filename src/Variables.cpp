@@ -27,15 +27,15 @@ void VariablesClass::init(){
 
     connectors[V_BLOB_PULSE_DISTANCE_OFFSET] = {
         S_BLOB_AUDIO_VALUE,
-        1,
-        0,
+        Settings.AUDIO_RADIUS.scaler,
+        Settings.AUDIO_RADIUS.offset,
         1,
     };
 
     connectors[V_BLOB_ALPHA] = {
         S_BLOB_AUDIO_VALUE,
-        0.5,
-        0.5,
+        Settings.AUDIO_ALPHA.scaler,
+        Settings.AUDIO_ALPHA.offset,
         1,
     };
 }
