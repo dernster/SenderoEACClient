@@ -12,7 +12,7 @@
 	    <blobDistanceThreshold>3</blobDistanceThreshold>
 	    <minLightingRadius>0.2</minLightingRadius>
 	    <maxLightingRadius>1</maxLightingRadius>
-	    <maxBlobs>2</maxBlobs>
+	    <maxBlobs>10</maxBlobs>
         <blobPulseMaxOffset>120</blobPulseMaxOffset>
 	</common>
     

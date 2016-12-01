@@ -60,7 +60,7 @@ void BlobManagerClass::update() {
             newBlobData->posFilter.setFc(Settings.BLOB_POSITION_FC);
 
             // convert to coord space
-            newBlobData->x = (normalize(newBlobData->x) - .5) * Settings.ROOM_WIDTH;
+            newBlobData->x = ((1 - normalize(newBlobData->x)) - .5) * Settings.ROOM_WIDTH;
             newBlobData->y = ((1 - normalize(newBlobData->y)) - .5) * Settings.ROOM_DEPTH;
             newBlobData->size = normalize(newBlobData->size);
 
