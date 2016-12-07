@@ -99,9 +99,15 @@ SettingsManager* SettingsManager::getInstance(){
 }
 
 BehaviourComposer SettingsManager::getComposerWithMood(string mood){
-    std::map<string, BehaviourComposer>::iterator it;
+
+    BehaviourTime time = { "follower", 120};
+    vector<BehaviourTime> descriptor = {time};
+    BehaviourComposer comp = {descriptor, 0};
+    return comp;
+    //std::map<string, BehaviourComposer>::iterator it;
     
-    it = moods.find(mood);
-    if (it != moods.end())
-        return (BehaviourComposer) it->second;
+    //it = moods.find(mood);
+    
+    //if (it != moods.end())
+    //    return (BehaviourComposer) it->second;
 }

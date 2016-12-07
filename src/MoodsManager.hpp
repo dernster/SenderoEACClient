@@ -15,7 +15,7 @@
 
 using namespace std;
 
-#define OSC_PORT_MOODS 12346
+#define OSC_PORT_MOODS 12345
 
 #define MoodsManager (*MoodsManagerClass::instance())
 

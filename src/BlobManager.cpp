@@ -29,6 +29,7 @@ void BlobManagerClass::init() {
     // OSC receiver for Blobs
     receiver.setup(OSC_PORT_BLOBS);
     ofAddListener(MoodsManager.moodUpdate, this, &BlobManagerClass::onMoodUpdate);
+    ofAddListener(MoodsManager.moodChanged, this, &BlobManagerClass::onMoodUpdate);
 }
 
 void BlobManagerClass::onMoodUpdate(Mood & mood){
@@ -143,6 +144,8 @@ void BlobManagerClass::asignColorTo(Blob *b){
 }
 
 void BlobManagerClass::reassignBlobColors(){
+
+    // cout << "reasignando colores!" << endl;
     for(int i = 0; i < blobs.size(); i++) {
         Blob* blob = blobs[i];
         blob->color = MoodsManager.getColorForBlobId(blob->id);

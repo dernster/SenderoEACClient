@@ -60,9 +60,12 @@ void MoodsManagerClass::update(){
                 currentMood = new Mood();
             
             currentMood->id = m.getArgAsString(0);
+
             currentMood->hue = m.getArgAsFloat(1);
             currentMood->saturation = m.getArgAsFloat(2);
             currentMood->value = m.getArgAsFloat(3);
+
+            // cout << "========== NEW MOOD with hue = " << currentMood->hue << endl;
 
             int x = 0;
             if (currentMood->id != lastMoodId) {
@@ -91,16 +94,21 @@ void MoodsManagerClass::updateColors(){
     if (!currentMood)
         return;
 
-    int hueDelta = 255.f / (Settings.MAX_BLOBS + 1);
+    int hueDelta = 255.f / (3.f);
     int baseHue = currentMood->hue;
     int baseSaturation = currentMood->saturation;
     int baseValue = currentMood->value;
 
+    // cout << "updating mood colors" << endl;
+
     for(int i = 0; i < Settings.MAX_BLOBS; i++) {
-        int hue = (baseHue + ((i+1) * hueDelta)) % 255;
+        int hue = (baseHue + (((i % 2)+ 1) * hueDelta)) % 255;
+        // cout << hue << endl;
         ColorAndBlob& colorAndBlob = colors[i];
         colorAndBlob.color.setHsb(hue, baseSaturation, baseValue);
     }
+
+    // cout << "end update colors" << endl;
 
 }
 

@@ -11,7 +11,7 @@
 	    <roomDepth>3.8</roomDepth>
 	    <blobDistanceThreshold>3</blobDistanceThreshold>
 	    <minLightingRadius>0.2</minLightingRadius>
-	    <maxLightingRadius>1</maxLightingRadius>
+	    <maxLightingRadius>0.7</maxLightingRadius>
 	    <maxBlobs>10</maxBlobs>
         <blobPulseMaxOffset>120</blobPulseMaxOffset>
 	</common>

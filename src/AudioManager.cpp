@@ -35,6 +35,7 @@ void AudioManagerClass::update(){
         if(m.getAddress() == "/blobAudio"){
             int id = m.getArgAsInt32(0);
             float value = MIN(MAX(m.getArgAsFloat(1),0), 1);
+            // cout << "new audio value " << value << endl;
             BlobManager.setAudioValue(id, value);
         // Background sound message
         } else if(m.getAddress() == "/backgroundAudio"){

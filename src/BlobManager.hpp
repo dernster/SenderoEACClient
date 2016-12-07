@@ -15,7 +15,7 @@
 #include "MoodsManager.hpp"
 
 #define EXPIRATION_TIME 0.1
-#define OSC_PORT_BLOBS 12345
+#define OSC_PORT_BLOBS 12346
 
 #define BlobManager (*BlobManagerClass::instance())
 
